@@ -9,3 +9,36 @@ The purpose of this application is so it can be compatible with modern browsers 
 
 Link for the developer manual: 
 It is also added in the bottom half of this document for convenience
+
+
+
+Welcome to the developer manual
+
+Clone the repository:
+git clone https://github.com/yourusername/currency-converter-app.git
+
+Our code uses JavaScript, HTML, and CSS, so there are minimal dependencies
+
+Running the application:
+open in your browser or any local web server
+
+Running Tests:
+- API request validations
+- currrency calculations
+- user settings
+
+Server API reference
+We used https://exchangerate.host for currency information
+
+GET/symbols: fetches currency code and names
+GET/convert: convert one currency to another
+GET/latest: latest exchange rates
+
+Bugs and Issues:
+light/dark mode switch doesn't always work
+
+Roadmap for future development:
+- add user authentication and store their data
+- improve chart visualizations
+- enhance accessibility
+
