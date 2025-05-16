@@ -2,7 +2,7 @@
 
 <html>
 
-    <title>INST377 - Currency Converter</title>
+    <title>INST377 - Currency Converter - Settings</title>
         
         <link rel="stylesheet" href="final_project.css">
         <script src="final_project.js" defer></script>
@@ -11,7 +11,7 @@
 
     <body>
 
-        <header id="bar">Welcome to our Currency Converter</header>
+        <header id="bar">Settings</header>
 
         <nav id="nav_bar">
             <ul>
@@ -22,7 +22,24 @@
             </ul>
         </nav>
 
-
+        <div id="centered">
+            <form id="settingsForm">
+                <label for="preferred_currency">Default currency: </label>
+                <select for="preferred_currency"></select>
+                <br>
+                <label for="decimal_precision">Decimal Precision [1-5]: </label>
+                <input type="number" id="decimal_precision" min="0" max="5">
+                <br>
+                <label for="theme">Theme: </label>
+                <select id="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <br>
+                <br>
+                <button id="save_settings" type="submit">Save Preferences</button>
+            </form>
+        </div>
 
 
 

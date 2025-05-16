@@ -2,7 +2,7 @@
 
 <html>
 
-    <title>INST377 - Currency Converter</title>
+    <title>INST377 - Currency Converter - Home</title>
         
         <link rel="stylesheet" href="final_project.css">
         <script src="final_project.js" defer></script>
@@ -22,7 +22,21 @@
             </ul>
         </nav>
 
-
+        <h1>Convert your currency instantly!</h1>
+        <!--laod currencies from api-->
+        <!--convert currency-->
+        <div id="converted">
+            <label for="fromCurrency">From Currency: </label>
+            <select id="fromCurrency"></select>
+            <br>
+            <label for="toCurrency">To Currency: </label>
+            <select id="toCurrency"></select>
+            <br>
+            <label for="amount">Conversion Amount: </label>
+            <input type="number" id="amount" value="1">
+            <br>
+            <button id="convert_button" onclick="">Convert</button>
+        </div>
 
 
 

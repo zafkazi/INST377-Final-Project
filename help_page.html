@@ -2,7 +2,7 @@
 
 <html>
 
-    <title>INST377 - Currency Converter</title>
+    <title>INST377 - Currency Converter - Help</title>
         
         <link rel="stylesheet" href="final_project.css">
         <script src="final_project.js" defer></script>
@@ -11,7 +11,7 @@
 
     <body>
 
-        <header id="bar">Welcome to our Currency Converter</header>
+        <header id="bar">Help Page</header>
 
         <nav id="nav_bar">
             <ul>
@@ -22,9 +22,26 @@
             </ul>
         </nav>
 
+        <h1>Have Questions? Feel free to reach out!</h1>
+        <form name="tester" onsubmit="return textValidation()">
+            <label for="tester">Name: </label>
+            <input type="text" id="name" required>
+            <br>
+            <label for="date">Date: </label>
+            <input type="date" id="concern" name="date" required>
+            <br>
+            <label for="concerns">Concern: </label>
+            <textarea  id="bigbox" name="bigbox" rows="3" cols="50" required> </textarea>
+            <br>
+            <input type="submit" id="button-submit" value="Submit">
 
+        </form>
 
-
+        <h2>How to use this website:</h2>
+        <h3>Home Page - convert the currencies of your choice</h3>
+        <h3>About Page - learn about the reason why the page was created</h3>
+        <h3>Help Page - Leave any questions, or just learn the purpose of each page</h3>
+        <h3>Settings Page - change items such as preferred currency, decimal precision, and toggle between light and dark mode.</h3>
 
         <footer id="foot">
             <p>Currency Converter, 2025</p>
