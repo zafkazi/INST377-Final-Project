@@ -1,0 +1,33 @@
+body{
+    background-color:white;
+    padding: 2px;
+    width: 100%;
+    margin: 5px;
+}
+#bar{
+    padding: 5px;
+    text-align: left;
+    font-size: 30pt;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 5px;
+    clear: both;
+    text-align: center;
+}
+#nav_bar{
+    background-color: deepskyblue;
+    padding: 3px;
+    text-align: center;
+    color: white;
+    font-size: 13pt;
+    margin: 5px;
+}
+#nav_bar li:hover{
+    background-color:greenyellow;
+    color: green;
+}
+#nav_bar ul li{
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+}
