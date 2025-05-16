@@ -6,12 +6,18 @@ body{
 }
 #bar{
     padding: 5px;
-    text-align: left;
     font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
     margin: 5px;
     clear: both;
     text-align: center;
+}
+#foot{
+    background-color: aliceblue;
+    text-align: center;
+    padding: 5px;
+    font-size: 10pt;
+    font-family: 'Times New Roman', Times, serif;
 }
 #nav_bar{
     background-color: deepskyblue;
@@ -30,4 +36,11 @@ body{
     display: inline-block;
     text-align: center;
     padding: 10px;
+}
+#about{
+    display: block;
+    margin: auto;
+}
+#text{
+    text-align: center;
 }
