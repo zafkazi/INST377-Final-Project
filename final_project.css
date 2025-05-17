@@ -63,7 +63,7 @@ body{
   box-sizing: border-box;
   color: #111;
   cursor: pointer;
-  display: flex;
+  display: inline-block;
   font-family: Inter,sans-serif;
   font-size: 16px;
   height: 48px;
@@ -109,4 +109,14 @@ outline: 0;
     padding: 0 40px;
   }
 }
+}
+/*
+convert div (home page)
+*/
+#convert{
+    padding: 5px;
+    text-align: center;
+}
+#convertForm{
+    font-size: 15pt;
 }

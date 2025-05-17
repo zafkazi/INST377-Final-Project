@@ -25,7 +25,8 @@
         <h1>Convert your currency instantly!</h1>
         <!--laod currencies from api-->
         <!--convert currency-->
-        <div id="converted">
+        <div id="convert">
+            <form id="convertForm">
             <label for="fromCurrency">From Currency: </label>
             <select id="fromCurrency"></select>
             <br>
@@ -35,11 +36,13 @@
             <label for="amount">Conversion Amount: </label>
             <input type="number" id="amount" value="1">
             <br>
+            <br>
             <button id="convert_button" onclick="">Convert</button>
+            </form>
         </div>
 
 
-
+        <br>
         <footer id="foot">
             <p>Currency Converter, 2025</p>
         </footer>
