@@ -6,6 +6,7 @@
         
         <link rel="stylesheet" href="final_project.css">
         <script src="final_project.js" defer></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
 
     </head>
 
@@ -46,6 +47,35 @@
         
         <button onclick="toggleTheme()" id="theme">🌗 Toggle Theme</button>
 
+        <div id="centered">
+            <div id="voice_control">
+                <div>
+                    <h2>On this website, you can use voice commands to navigate the different pages and speak different commands, listed below:</h2>
+                    <br>
+                    <p>Make sure your mic is on by pressing the "Turn on Audio" button.</p>
+                    <ul>
+                        <li>"Hello" - Sends alert saying "Hello World".</li>
+                            <ul>
+                                <li>Say: Hello</li>
+                            </ul>
+                        <li>"Navigate to [page_name]" - Navigates to Home, About, Help, or Settings page</li>   
+                            <ul>
+                                <li>Say: Navigate to [page_name]</li>
+                            </ul>
+                    </ul>
+
+                    <div id="centered">
+                        <div id="custom_buttons">
+                            <button id="custom_1" onclick="startVoice()">Turn on Audio</button>
+                            <button id="custom_2" onclick="stopVoice()">Turn off Audio</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+                
+        </div>
 
         <footer id="foot">
             <p>Currency Converter, 2025</p>

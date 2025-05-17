@@ -8,16 +8,37 @@ function textValidation(){
             }
             return false;
 }
-
+//annyang
+function startVoice(){
+    if (annyang){
+        const commands = {
+            'hello': () => alert('Hello World'),
+            'change color to *color': (color) => document.body.style.backgroundColor = color,
+            'navigate to *page': (page) => {
+                const target = page.toLowerCase();
+                if (target === 'home') window.location.href = 'home_page.html';
+                else if (target === 'about') window.location.href = 'about_page.html';
+                else if (target === 'help') window.location.href = 'help_page.html';
+                else if (target === 'settings') window.location.href = 'settings_page.html';
+            },
+               
+        }
+        annyang.addCommands(commands);
+        annyang.start();
+    }
+}
+function stopVoice(){
+    if(annyang){
+        annyang.abort();
+    }
+}
 //populate currencies in form
 function populateForm(){
     const fromCurrency = document.getElementById("fromCurrency");
     const toCurrency  = document.getElementById("toCurrency");
-    const preferredCurrency  = document.getElementById("preferred_currency");
 
 
-
-    fetch("https://api.frankfurter.app/currencies")
+    fetch(`https://api.frankfurter.app/currencies`)
     .then((res) => res.json())
     .then((resJson) => {
         console.log('Response JSON: ', resJson);
@@ -37,11 +58,29 @@ function populateForm(){
             option2.innerHTML = resJson[currencyCode];
             toCurrency.appendChild(option2);
 
-            //Populate To Preferred Currency
+        }
+    });
+
+}
+
+function defaultCurrency(){
+    const preferredCurrency  = document.getElementById("preferredCurrency");
+
+    fetch(`https://api.frankfurter.app/currencies`)
+    .then((res) => res.json())
+    .then((resJson) => {
+        console.log('Response JSON: ', resJson);
+
+        for (const currencyCode in resJson) {
+            console.log('Object: ', currencyCode);
+            
+            //Populate Preferred Currency
             const option3 = document.createElement("option");
             option3.value = currencyCode;
             option3.innerHTML = resJson[currencyCode];
             preferredCurrency.appendChild(option3);
+            
+
         }
     });
 
@@ -93,4 +132,8 @@ function toggleTheme() {
     console.log(localStorage.getItem("background"));
     applyTheme(localStorage.getItem("background"));
 }
+
+
+
 window.onload = populateForm;
+window.onload = defaultCurrency;
