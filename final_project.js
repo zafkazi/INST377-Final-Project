@@ -156,6 +156,9 @@ function toggleTheme() {
     applyTheme(localStorage.getItem("background"));
 }
 
+//chart
+let currencyChart;
+
 
 
 window.onload = populateForm;

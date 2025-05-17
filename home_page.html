@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="final_project.css">
         <script src="final_project.js" defer></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     </head>
 
@@ -44,6 +45,13 @@
 
         </div>
 
+        <h2>Currency Exchange Rate Chart</h2>
+        <label for="chartCurrency">Select Currency to Chart Against EUR:</label>
+        <select id="chartCurrency"></select>
+        <br><br>
+        <canvas id="currencyChart" width="600" height="300"></canvas>
+        <br>
+        
         <button onclick="toggleTheme()" id="theme">🌗 Toggle Theme</button>
 
         <div id="centered">
