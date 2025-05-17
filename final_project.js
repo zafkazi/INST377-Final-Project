@@ -78,7 +78,6 @@ function populateForm(){
 
 }
 
-
 function defaultCurrency(){
     const preferredCurrency  = document.getElementById("preferredCurrency");
 
@@ -99,7 +98,8 @@ function defaultCurrency(){
     });
 
 }
-//DOES NOT WORK
+//DOES NOT WORK ---- using our api, always sending alert that conversion failed
+//considered using the other api, but only using it to load the forms for now
 function convertCurrency(){
     const from = document.getElementById("fromCurrency").value;
     const to = document.getElementById("toCurrency").value;
