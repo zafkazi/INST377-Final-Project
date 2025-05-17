@@ -18,6 +18,10 @@ Clone the repository:
 git clone https://github.com/yourusername/currency-converter-app.git
 
 Our code uses JavaScript, HTML, and CSS, so there are minimal dependencies
+npm install
+
+optional server for development
+npx http-server
 
 Running the application:
 open in your browser or any local web server
@@ -28,7 +32,7 @@ Running Tests:
 - user settings
 
 Server API reference
-We used https://exchangerate.host for currency information
+We used https://exchangerate.host and https://frankfurter.dev/ for currency information
 
 GET/symbols: fetches currency code and names
 GET/convert: convert one currency to another
@@ -36,6 +40,7 @@ GET/latest: latest exchange rates
 
 Bugs and Issues:
 light/dark mode switch doesn't always work
+api did not always work, integrated different APIs as well.
 
 Roadmap for future development:
 - add user authentication and store their data
