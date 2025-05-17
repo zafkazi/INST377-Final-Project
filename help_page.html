@@ -23,7 +23,7 @@
         </nav>
 
         <h1>Have Questions? Feel free to reach out!</h1>
-        <form name="tester" onsubmit="return textValidation()">
+        <form name="tester" onsubmit="return textValidation();">
             <label for="tester">Name: </label>
             <input type="text" id="name" required>
             <br>
@@ -42,6 +42,10 @@
         <h3>About Page - learn about the reason why the page was created</h3>
         <h3>Help Page - Leave any questions, or just learn the purpose of each page</h3>
         <h3>Settings Page - change items such as preferred currency, decimal precision, and toggle between light and dark mode.</h3>
+
+        
+        <button onclick="toggleTheme()" id="theme">🌗 Toggle Theme</button>
+
 
         <footer id="foot">
             <p>Currency Converter, 2025</p>

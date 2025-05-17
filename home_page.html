@@ -26,7 +26,7 @@
         <!--laod currencies from api-->
         <!--convert currency-->
         <div id="convert">
-            <form id="convertForm">
+            <form id="convertForm" onsubmit="return false;">
             <label for="fromCurrency">From Currency: </label>
             <select id="fromCurrency"></select>
             <br>
@@ -41,6 +41,7 @@
             </form>
         </div>
 
+        <button onclick="toggleTheme()" id="theme">🌗 Toggle Theme</button>
 
         <br>
         <footer id="foot">
