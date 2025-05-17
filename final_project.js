@@ -33,6 +33,7 @@ function stopVoice(){
     }
 }
 //populate currencies in form
+
 function populateForm(){
     const fromCurrency = document.getElementById("fromCurrency");
     const toCurrency  = document.getElementById("toCurrency");
@@ -63,6 +64,7 @@ function populateForm(){
 
 }
 
+/*
 function defaultCurrency(){
     const preferredCurrency  = document.getElementById("preferredCurrency");
 
@@ -84,6 +86,27 @@ function defaultCurrency(){
         }
     });
 
+}
+*/
+function convertCurrency(){
+    const from = document.getElementById("fromCurrency").value;
+    const to = document.getElementById("toCurrency").value;
+    const amount = document.getElementById("amount").value;
+
+    if(!from || !to || !amount){
+        alert("Please fill in all the fields before converting.")
+        return;
+    }
+
+    fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("conversionResult").innerHTML = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
+            } else {
+                alert("Conversion failed. Please try again.");
+            }
+        });
 }
 
 if(!localStorage.getItem("background")){
@@ -136,4 +159,4 @@ function toggleTheme() {
 
 
 window.onload = populateForm;
-window.onload = defaultCurrency;
+//window.onload = defaultCurrency;
