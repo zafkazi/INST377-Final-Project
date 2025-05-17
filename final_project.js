@@ -21,6 +21,21 @@ function startVoice(){
                 else if (target === 'help') window.location.href = 'help_page.html';
                 else if (target === 'settings') window.location.href = 'settings_page.html';
             },
+            'look up *currency': (currency) =>{
+                const cleaned = currency.trim().toUpperCase();
+
+                const chartDropdown = document.getElementById("chartCurrency");
+                const options = Array.from(chartDropdown.options);
+
+                const match = options.find(opt => opt.value === cleaned);
+
+                if (match) {
+                    chartDropdown.value = cleaned;
+                    lookupCurrency(); // load the chart
+                } else {
+                    alert(`Currency "${cleaned}" not found.`);
+                }
+            }
                
         }
         annyang.addCommands(commands);
@@ -33,7 +48,6 @@ function stopVoice(){
     }
 }
 //populate currencies in form
-
 function populateForm(){
     const fromCurrency = document.getElementById("fromCurrency");
     const toCurrency  = document.getElementById("toCurrency");
@@ -64,7 +78,7 @@ function populateForm(){
 
 }
 
-/*
+
 function defaultCurrency(){
     const preferredCurrency  = document.getElementById("preferredCurrency");
 
@@ -80,14 +94,12 @@ function defaultCurrency(){
             const option3 = document.createElement("option");
             option3.value = currencyCode;
             option3.innerHTML = resJson[currencyCode];
-            preferredCurrency.appendChild(option3);
-            
-
+            preferredCurrency.appendChild(option3); //error on console, not sure but still runs
         }
     });
 
 }
-*/
+//DOES NOT WORK
 function convertCurrency(){
     const from = document.getElementById("fromCurrency").value;
     const to = document.getElementById("toCurrency").value;
@@ -111,6 +123,86 @@ function convertCurrency(){
 
 if(!localStorage.getItem("background")){
     localStorage.setItem('background', 'light');
+}
+//chart
+let currencyChart;
+function populateChartDropdown(){
+    const chartCurrency = document.getElementById("chartCurrency");
+
+    fetch("https://api.frankfurter.app/currencies")
+        .then(res => res.json())
+        .then(data => {
+            for (const code in data) {
+                const option = document.createElement("option");
+                option.value = code;
+                option.textContent = `${code} - ${data[code]}`;
+                chartCurrency.appendChild(option);
+            }
+        });
+
+    chartCurrency.addEventListener("change", lookupCurrency);
+}
+async function lookupCurrency() {
+    const currencyCode = document.getElementById("chartCurrency").value;
+
+    if (!currencyCode) {
+        alert("Please select a currency.");
+        return;
+    }
+
+    const toDate = new Date();
+    const fromDate = new Date();
+    fromDate.setFullYear(fromDate.getFullYear() - 2); // Go back 2 years
+
+    const to = toDate.toISOString().split("T")[0];
+    const from = fromDate.toISOString().split("T")[0];
+
+    const url = `https://api.frankfurter.app/${from}..${to}?from=EUR&to=${currencyCode}`;
+
+    const dateLabels = [];
+    const exchangeRates = [];
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        for (const date in data.rates) {
+            dateLabels.push(date);
+            exchangeRates.push(data.rates[date][currencyCode]);
+        }
+
+        const ctx = document.getElementById("currencyChart").getContext("2d");
+
+        if (currencyChart) {
+            currencyChart.destroy();
+        }
+
+        currencyChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: dateLabels,
+                datasets: [{
+                    label: `EUR to ${currencyCode} (Past 2 Years)`,
+                    data: exchangeRates,
+                    borderWidth: 2,
+                    borderColor: "#28a745",
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching chart data:", error);
+        alert("Failed to fetch currency data.");
+    }
 }
 //dark mode
 function applyTheme(theme){
@@ -136,30 +228,11 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('darkmode');
 
     }
-    /*
-    const savedTheme = localStorage.getItem('preferredTheme') || 'light';
-    applyTheme(savedTheme);
-
-    const themeSelector = document.getElementById('theme');
-    if (themeSelector) {
-        themeSelector.value = savedTheme;
-        themeSelector.addEventListener('change', (e) => {
-            applyTheme(e.target.value);
-        });
-    }
-        */
+    defaultCurrency();
+    populateForm();
+    populateChartDropdown();
 })
 function toggleTheme() {
-    //const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-    //const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     console.log(localStorage.getItem("background"));
     applyTheme(localStorage.getItem("background"));
 }
-
-//chart
-let currencyChart;
-
-
-
-window.onload = populateForm;
-//window.onload = defaultCurrency;
