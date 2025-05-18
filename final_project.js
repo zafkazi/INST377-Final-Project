@@ -101,24 +101,24 @@ function defaultCurrency(){
 //DOES NOT WORK ---- using our api, always sending alert that conversion failed
 //considered using the other api, but only using it to load the forms for now
 function convertCurrency(){
-    const from = document.getElementById("fromCurrency").value;
-    const to = document.getElementById("toCurrency").value;
-    const amount = document.getElementById("amount").value;
+    const fromCurrency = document.getElementById("fromCurrency").value;
+    const toCurrency = document.getElementById("toCurrency").value;
+    const amount = document.getElementById("number").value;
 
-    if(!from || !to || !amount){
-        alert("Please fill in all the fields before converting.")
-        return;
+    //Checks to see if currencies are same
+    if (fromCurrency == toCurrency){
+        alert("You cannot convert to the same currency");
     }
-
-    fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById("conversionResult").innerHTML = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
-            } else {
-                alert("Conversion failed. Please try again.");
-            }
-        });
+    else{
+        fetch(`https://api.frankfurter.dev/v1/latest?base=${fromCurrency}&symbols=${toCurrency}`)
+    .then((resp) => resp.json())
+    .then((data) => {
+        const convertedAmount = (amount * data.rates[toCurrency]).toFixed(2);
+        //alert(`${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`);
+        document.getElementById("conversionResult").innerHTML = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+    });
+        return false;
+    }
 }
 
 if(!localStorage.getItem("background")){
