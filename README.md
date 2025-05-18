@@ -39,8 +39,9 @@ GET/convert: convert one currency to another
 GET/latest: latest exchange rates
 
 Bugs and Issues:
-light/dark mode switch doesn't always work
-api did not always work, integrated different APIs as well.
+light/dark mode switch didn't always work/is glitchy when page was refreshed
+API did not work the way we wanted to, used another API since we know it works
+Had issues with some elements working on one page, but not another
 
 Roadmap for future development:
 - add user authentication and store their data
