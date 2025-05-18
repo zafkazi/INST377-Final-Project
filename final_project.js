@@ -93,7 +93,7 @@ function defaultCurrency(){
             const option3 = document.createElement("option");
             option3.value = currencyCode;
             option3.innerHTML = resJson[currencyCode];
-            preferredCurrency.appendChild(option3); //error on console, not sure but still runs
+            preferredCurrency.appendChild(option3);
         }
     });
 
