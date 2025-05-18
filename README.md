@@ -13,6 +13,8 @@ It is also added in the bottom half of this document for convenience
 
 
 Welcome to the developer manual
+Install node.js
+Install git/clone repo
 
 Clone the repository:
 git clone https://github.com/yourusername/currency-converter-app.git
@@ -20,11 +22,11 @@ git clone https://github.com/yourusername/currency-converter-app.git
 Our code uses JavaScript, HTML, and CSS, so there are minimal dependencies
 npm install
 
-optional server for development
-npx http-server
-
 Running the application:
 open in your browser or any local web server
+
+Start backend:
+npm start
 
 Running Tests:
 - API request validations
