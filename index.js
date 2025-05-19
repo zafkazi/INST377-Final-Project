@@ -1,60 +1,70 @@
+const { createClient } = require('@supabase/supabase-js');
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const axios = require('axios');
-const supabase = require('./supabaseClient');
-require('dotenv').config();
 
 const app = express();
-app.use(express.json());
+const port = process.env.PORT || 4000;
 
-// GET /symbols - Fetch currency symbols and store them
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+
+// Supabase setup
+const url = 'https://xsrfaygnwjouslnhhbzd.supabase.co';
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzcmZheWdud2pvdXNsbmhoYnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MjA0MjUsImV4cCI6MjA2MzA5NjQyNX0.M0UTWpv6rcjF5YMoxv9wwpXT7vvmm7f14g8KfXQw0RA';
+
+const supabase = createClient(url, key);
+
+// Home route
+app.get('/', (req, res) => {
+  res.sendFile('INST377-CurrencyConverter.html', { root: __dirname });
+});
+
+// GET /symbols - Retrieve currency symbols from Supabase
 app.get('/symbols', async (req, res) => {
-  try {
-    const { data } = await axios.get('https://api.exchangerate.host/symbols');
-    const symbols = data.symbols;
+  const { data, error } = await supabase
+    .from('currency_symbols')
+    .select();
 
-    const upsertData = Object.entries(symbols).map(([code, { description }]) => ({
-      code,
-      description
-    }));
-
-    await supabase
-      .from('currency_symbols')
-      .upsert(upsertData, { onConflict: ['code'] });
-
-    res.json(symbols);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: 'Failed to fetch symbols' });
+  if (error) {
+    console.error('Error retrieving symbols:', error.message);
+    res.status(500).json({ error: 'Failed to retrieve symbols from database' });
+  } else {
+    res.json(data);
   }
 });
 
-// POST /convert - Convert currencies and log the conversion
+// POST /convert - Fetch conversion from exchangerate.host and log to Supabase
 app.post('/convert', async (req, res) => {
   const { from, to, amount } = req.body;
 
+  if (!from || !to || !amount) {
+    return res.status(400).json({ error: 'Missing required fields: from, to, or amount' });
+  }
+
   try {
-    const response = await axios.get(`https://api.exchangerate.host/convert`, {
+    const response = await axios.get('https://api.exchangerate.host/convert', {
       params: { from, to, amount }
     });
 
     const result = response.data.result;
 
-    await supabase.from('conversion_logs').insert({
-      from,
-      to,
-      amount,
-      result
-    });
+    await supabase
+      .from('conversion_logs')
+      .insert({ from, to, amount, result });
 
-    res.json(response.data);
+    res.json({ from, to, amount, result });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).json({ error: 'Conversion failed' });
+    console.error('Error during conversion:', error.message);
+    res.status(500).json({ error: 'Currency conversion failed' });
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });
 
