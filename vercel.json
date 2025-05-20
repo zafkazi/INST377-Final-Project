@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    {
+      "src": "/symbols",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/convert",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/load-symbols",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/",
+      "dest": "/public/INST377-CurrencyConverter.html"
+    },
+    {
+      "handle": "filesystem"
+    }
+  ],
+  "env": {
+    "SUPABASE_URL": "https://xsrfaygnwjouslnhhbzd.supabase.co",
+    "SUPABASE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzcmZheWdud2pvdXNsbmhoYnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MjA0MjUsImV4cCI6MjA2MzA5NjQyNX0.M0UTWpv6rcjF5YMoxv9wwpXT7vvmm7f14g8KfXQw0RA"
+  }
+}
