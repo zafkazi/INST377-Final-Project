@@ -89,7 +89,7 @@ Final Notes
 If you’re new to this project, begin by reviewing the `index.js` and `supabaseClient.js` files. Review your Supabase tables via the dashboard, and monitor logs there when testing. For help with conversion data, refer to exchangerate.host’s official docs. Future contributions should follow semantic commit conventions and keep PRs focused and well-documented.
 
 Here is the vercel:
-https://inst377finalproject-khaki.vercel.app/
+https://inst377finalproject-jp1xljdyh-eogundanas-projects.vercel.app/
 
 
 
