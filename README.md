@@ -62,10 +62,10 @@ To get started, ensure you have Node.js (v16 or later), npm (comes with Node.js)
 Create a `.env` file in the root directory and paste the following configuration using your actual Supabase project values:
 SUPABASE_URL=https://xsrfaygnwjouslnhhbzd.supabase.co
 SUPABASE_KEY=your-supabase-anon-key
-PORT=3000
+PORT=4000
 
 Running the Application
-To run the backend server locally, use the command `npm start`. If successful, the server will run at `http://localhost:3000`. You can test your endpoints using Postman, curl, or from the front-end.
+To run the backend server locally, use the command `npm start`. If successful, the server will run at `http://localhost:4000`. You can test your endpoints using Postman, curl, or from the front-end.
 
 API Endpoints  
 `GET /symbols`: This endpoint fetches the full list of supported currencies from exchangerate.host and stores the data into the Supabase `currency_symbols` table using an upsert operation. It returns a JSON object containing currency codes and their descriptions.
